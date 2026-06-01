@@ -1,5 +1,4 @@
-export default function Line(idLine, name, links) {
-    this.idLine = idLine;
+export default function Line(line_id, name) {
+    this.idLine = line_id;
     this.name = name;
-    this.links = links;
 }

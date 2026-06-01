@@ -1,5 +1,5 @@
-export default function Event(idEvent, description, points) {
-    this.idEvent = idEvent;
+export default function Event(event_id, description, score) {
+    this.event_id = event_id;
     this.description = description;
-    this.points = points;
+    this.score = score;
 }

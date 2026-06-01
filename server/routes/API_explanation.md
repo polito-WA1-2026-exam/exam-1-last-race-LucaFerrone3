@@ -1,0 +1,313 @@
+# Users API
+
+## Create Account ~ POST /users/register
+
+Creates a new user account.
+
+**Request Body:**
+
+```json
+{
+    "email": "user@example.com",
+    "password": "password123"
+}
+```
+
+**Response:**
+
+```json
+{
+    "user_id": 42,
+    "email": "user@example.com"
+}
+```
+
+**Status Codes:**
+
+* `201` Account created successfully
+* `400` Invalid email or password format
+* `409` Email already in use
+* `500` Internal Server Error
+
+<br>
+
+## Login ~ POST /users/login
+
+Login with an existing user account.
+
+**Request Body:**
+
+```json
+{
+    "email": "user@example.com",
+    "password": "password123"
+}
+```
+
+**Response:**
+
+```json
+{
+    "user_id": 42,
+    "email": "user@example.com"
+}
+```
+
+**Status Codes:**
+
+* `200` Login successful
+* `400` Missing or invalid request fields
+* `500` Internal Server Error
+
+<br><br>
+
+# Events API
+
+## Get Events ~ GET /events?steps=n
+
+Returns a list of `n` events.
+
+**Query Parameters:**
+
+| Parameter | Type    | Description                 |
+| --------- | ------- | --------------------------- |
+| steps     | integer | Number of events to return  |
+
+**Response:**
+
+```json
+[
+    {
+        "event_id": 1,
+        "description": "The metro is delayed by 5 minutes.",
+        "score": 0,
+    },
+    {
+        "event_id": 2,
+        "description": "Bus strike",
+        "score": -4,
+    }
+]
+```
+
+**Status Codes:**
+
+* `200` Events retrieved successfully
+* `400` Invalid value for `steps`
+* `500` Internal Server Error
+
+<br>
+
+# Games API
+
+## Get Game Results ~ GET /games
+
+Returns the list of games played by the authenticated user.
+
+**Request Body:** None
+
+**Response:**
+
+```json
+[
+    {
+        "game_id": 1,
+        "start_station": "Porta Nuova",
+        "destination_station": "Vinzaglio",
+        "score": 16,
+        "won": true,
+        "played_at" : "01/06/2026"
+    },
+    {
+        "game_id": 2,
+        "start_station": "Porta Nuova",
+        "destination_station": "Porta Susa",
+        "score": 0,
+        "won": false,
+        "played_at" : "01/06/2026"
+    }
+]
+```
+
+**Status Codes:**
+
+* `200` Game results retrieved successfully
+* `500` Internal Server Error
+
+<br>
+
+## Add Game Result ~ POST /games/result
+
+Stores the result of a completed game.
+
+**Request Body:**
+
+```json
+{
+    "start_station": "Porta Nuova",
+    "destination_station": "Porta Susa",
+    "score": 0,
+    "won": false,
+    "played_at" : "01/06/2026"
+}
+```
+
+**Response:**
+
+```json
+{
+    "message": "Game result stored successfully"
+}
+```
+
+**Status Codes:**
+
+* `201` Game result stored successfully
+* `400` Invalid request data
+* `500` Internal Server Error
+
+<br>
+
+## Start Game ~ POST /games/start
+
+Starts a new game and returns the starting station, destination station, and the list of connections available from the starting station.
+
+**Request Body:** None
+
+**Response:**
+
+```json
+{
+    "from_station": {
+        "station_id": 1,
+        "name": "Porta Nuova",
+        "is_interchange": true
+    },
+    "to_station": {
+        "station_id": 5,
+        "name": "Vinzaglio",
+        "is_interchange": false
+    },
+    "reachable_stations": [
+        {
+            "connection_id": 4,
+            "line": {
+                "line_id": 5,
+                "name": "10",
+            },
+            "station": {
+                "station_id": 54,
+                "name": "Nizza",
+                "is_interchange": true
+            },
+
+        },
+        {
+            "connection_id": 43,
+            "line": {
+                "line_id": 12,
+                "name": "66",
+            },
+            "station": {
+                "station_id": 54,
+                "name": "Nizza",
+                "is_interchange": false
+            },
+
+        }
+    ]
+}
+```
+
+**Status Codes:**
+
+* `201` Game started successfully
+* `500` Internal Server Error
+
+
+<br>
+
+# Maps API
+
+
+## Get Complete Map ~ GET /maps
+
+Returns the complete transportation map as a graph.
+
+**Request Body:** None
+
+**Response:**
+
+```json
+{
+    "stations": [
+        {
+            "station_id": 55,
+            "name": "Nizza Sud",
+            "is_interchange": false
+        },
+        ...
+    ],
+    "connections": [
+        {
+            "connection_id": 4,
+            "line": {
+                "line_id": 5,
+                "name": "10",
+            },
+            "from_station": {
+                "station_id": 54,
+                "name": "Nizza",
+                "is_interchange": true
+            },
+            "to_station": {
+                "station_id": 55,
+                "name": "Nizza Sud",
+                "is_interchange": false
+            },
+
+        },
+        ...
+    ]
+}
+```
+
+**Status Codes:**
+
+* `200` Map retrieved successfully
+* `500` Internal Server Error
+
+<br>
+
+## Get Reachable Stations ~ GET /maps/stations/:station_id
+
+Returns the list of stations directly reachable from the specified station.
+
+**Path Parameters:**
+
+| Parameter  | Type    | Description               |
+| ---------- | ------- | ------------------------- |
+| station_id | integer | Identifier of the station |
+
+**Response:**
+
+```json
+[
+    {
+        "station_id": 4,
+        "name": "Bernini",
+        "is_interchange": false
+    },
+    {
+        "station_id": 54,
+        "name": "Nizza",
+        "is_interchange": true
+    },
+]
+```
+
+**Status Codes:**
+
+* `200` Stations retrieved successfully
+* `404` Station not found
+* `500` Internal Server Error
