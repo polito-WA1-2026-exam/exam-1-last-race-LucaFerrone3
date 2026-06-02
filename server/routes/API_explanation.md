@@ -25,7 +25,6 @@ Creates a new user account.
 **Status Codes:**
 
 * `201` Account created successfully
-* `400` Invalid email or password format
 * `409` Email already in use
 * `500` Internal Server Error
 
@@ -56,7 +55,19 @@ Login with an existing user account.
 **Status Codes:**
 
 * `200` Login successful
-* `400` Missing or invalid request fields
+* `400` Invalid credentials
+* `500` Internal Server Error
+
+<br>
+
+## Logout ~ DELETE /users/logout
+
+Logout for an already logged-in account.
+
+**Status Codes:**
+
+* `200` Logout successful
+* `401` Unauthorized
 * `500` Internal Server Error
 
 <br><br>
@@ -94,6 +105,7 @@ Returns a list of `n` events.
 
 * `200` Events retrieved successfully
 * `400` Invalid value for `steps`
+* `401` Unauthorized
 * `500` Internal Server Error
 
 <br>
@@ -132,6 +144,7 @@ Returns the list of games played by the authenticated user.
 **Status Codes:**
 
 * `200` Game results retrieved successfully
+* `401` Unauthorized
 * `500` Internal Server Error
 
 <br>
@@ -164,6 +177,7 @@ Stores the result of a completed game.
 
 * `201` Game result stored successfully
 * `400` Invalid request data
+* `401` Unauthorized
 * `500` Internal Server Error
 
 <br>
@@ -222,6 +236,7 @@ Starts a new game and returns the starting station, destination station, and the
 **Status Codes:**
 
 * `201` Game started successfully
+* `401` Unauthorized
 * `500` Internal Server Error
 
 
@@ -309,5 +324,6 @@ Returns the list of stations directly reachable from the specified station.
 **Status Codes:**
 
 * `200` Stations retrieved successfully
+* `401` Unauthorized
 * `404` Station not found
 * `500` Internal Server Error
