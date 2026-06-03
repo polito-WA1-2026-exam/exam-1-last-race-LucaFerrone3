@@ -1,3 +1,9 @@
+DELETE FROM Events;
+DELETE FROM Lines;
+DELETE FROM LineStations;
+DELETE FROM Connections;
+DELETE FROM Stations;
+
 INSERT INTO Events (description, score) VALUES
 ('Quiet journey', 0),
 ('Wrong platform', -2),
@@ -98,3 +104,131 @@ INSERT INTO Events (description, score) VALUES
 ('Severe disruption across multiple lines', -4),
 ('Lucky streak of perfect transfers', 4),
 ('You found a valuable transit reward', 4);
+
+
+INSERT INTO Stations (station_id, name, is_interchange) VALUES
+(1, 'Porta Nuova', 1),
+(2, 'Re Umberto', 1),
+(3, 'Vinzaglio', 1),
+(4, 'Porta Susa', 1),
+(5, 'XVIII Dicembre', 1),
+(6, 'Principi d Acaja', 0),
+(7, 'Bernini', 0),
+(8, 'Racconigi', 0),
+(9, 'Statuto', 1),
+(10, 'Castello', 1),
+(11, 'Solferino', 0),
+(12, 'Vittorio Veneto', 0),
+(13, 'Gran Madre', 0),
+(14, 'Mole Antonelliana', 0),
+(15, 'Carlo Alberto', 0),
+(16, 'Palazzo Nuovo', 0),
+(17, 'Cairoli', 0),
+(18, 'Madama Cristina', 0),
+(19, 'Marconi', 0),
+(20, 'Dante', 0);
+
+INSERT INTO Lines (line_id, name) VALUES
+(1, 'M1'),
+(2, 'Line 4'),
+(3, 'Line 13'),
+(4, 'Line 15'),
+(5, 'Line 18');
+
+-- M1
+INSERT INTO LineStations VALUES
+(1, 1, 1),
+(1, 2, 2),
+(1, 3, 3),
+(1, 4, 4),
+(1, 5, 5),
+(1, 6, 6),
+(1, 7, 7),
+(1, 8, 8);
+
+-- linea 4
+INSERT INTO LineStations VALUES
+(2, 5, 1),
+(2, 9, 2),
+(2, 10, 3),
+(2, 12, 4),
+(2, 13, 5);
+
+-- linea 13
+INSERT INTO LineStations VALUES
+(3, 4, 1),
+(3, 11, 2),
+(3, 10, 3),
+(3, 14, 4),
+(3, 13, 5);
+
+-- linea 15
+INSERT INTO LineStations VALUES
+(4, 1, 1),
+(4, 15, 2),
+(4, 10, 3),
+(4, 16, 4),
+(4, 17, 5);
+
+-- linea 18
+INSERT INTO LineStations VALUES
+(5, 20, 1),
+(5, 19, 2),
+(5, 18, 3),
+(5, 1, 4),
+(5, 2, 5),
+(5, 10, 6);
+
+INSERT INTO Connections VALUES
+(1,1,1,2),
+(2,1,2,1),
+(3,1,2,3),
+(4,1,3,2),
+(5,1,3,4),
+(6,1,4,3),
+(7,1,4,5),
+(8,1,5,4),
+(9,1,5,6),
+(10,1,6,5),
+(11,1,6,7),
+(12,1,7,6),
+(13,1,7,8),
+(14,1,8,7),
+
+(15,2,5,9),
+(16,2,9,5),
+(17,2,9,10),
+(18,2,10,9),
+(19,2,10,12),
+(20,2,12,10),
+(21,2,12,13),
+(22,2,13,12),
+
+(23,3,4,11),
+(24,3,11,4),
+(25,3,11,10),
+(26,3,10,11),
+(27,3,10,14),
+(28,3,14,10),
+(29,3,14,13),
+(30,3,13,14),
+
+(31,4,1,15),
+(32,4,15,1),
+(33,4,15,10),
+(34,4,10,15),
+(35,4,10,16),
+(36,4,16,10),
+(37,4,16,17),
+(38,4,17,16),
+
+(39,5,20,19),
+(40,5,19,20),
+(41,5,19,18),
+(42,5,18,19),
+(43,5,18,1),
+(44,5,1,18),
+(45,5,1,2),
+(46,5,2,1),
+(47,5,2,10),
+(48,5,10,2);
