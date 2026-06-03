@@ -1,7 +1,6 @@
 import { isLoggedIn } from "../service/auth.js";
 import express from "express";
 import EventService from "../service/events.js";
-import ValidationError from '../errors/ValidationError.js';
 
 const router = express.Router();
 

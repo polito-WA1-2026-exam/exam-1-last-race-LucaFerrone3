@@ -10,7 +10,7 @@ import UserService from "./service/users.js";
 //import routes
 import usersRoutes from './routes/users.js';
 //import mapsRoutes from './routes/maps.js';
-//import gamesRoutes from './routes/games.js';
+import gamesRoutes from './routes/games.js';
 import eventsRoutes from './routes/events.js';
 
 // init express
@@ -85,7 +85,7 @@ app.use((err, req, res, next) => {
 
 app.use('/users', usersRoutes);
 //app.use('/maps', mapsRoutes);
-//app.use('/games', gamesRoutes);
+app.use('/games', gamesRoutes);
 app.use('/events', eventsRoutes);
 
 

@@ -1,7 +1,7 @@
 import db from "../database/db.js";
 import Event from "../models/Event.js";
 
-const EventDao = {
+const EventDAO = {
 
     async getEvents() {
         return new Promise((resolve, reject) => {
@@ -28,4 +28,4 @@ const EventDao = {
 
 };
 
-export default EventDao;
+export default EventDAO;

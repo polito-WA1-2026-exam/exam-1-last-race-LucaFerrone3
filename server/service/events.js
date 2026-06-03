@@ -1,7 +1,6 @@
 import EventDAO from '../dao/event.js';
 import EventDTO from '../dto/event.js';
 import ServerError from '../errors/ServerError.js';
-import ValidationError from '../errors/ValidationError.js';
 
 function randomEventsWithReplacement(arr, n) {
     const result = [];
