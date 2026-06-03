@@ -2,7 +2,7 @@ import db from "../database/db.js";
 import crypto from 'crypto';
 import User from "../models/User.js";
 
-const UserDao = {
+const UserDAO = {
 
     async getUserByEmail(email) {
         return new Promise((resolve, reject) => {
@@ -10,6 +10,7 @@ const UserDao = {
             db.get(query, [email], (err, row) => {
                 if (err) {
                     reject(err);
+                    return;
                 }
                 if (row === undefined) {
                     resolve(false);
@@ -20,12 +21,13 @@ const UserDao = {
         });
     },
 
-    async getUser (email, password) {
+    async getUser(email, password) {
         return new Promise((resolve, reject) => {
             const query = 'SELECT * FROM Users WHERE email=?';
             db.get(query, [email], (err, row) => {
                 if (err) {
                     reject(err);
+                    return;
                 }
                 if (row === undefined) {
                     resolve(false);
@@ -33,6 +35,7 @@ const UserDao = {
                     crypto.scrypt(password, row.salt, 32, (err, hashedPassword) => {
                         if (err) {
                             reject(err);
+                            return;
                         }
                         if (!crypto.timingSafeEqual(Buffer.from(row.password_hash, 'hex'), hashedPassword)) {
                             resolve(false);
@@ -55,6 +58,7 @@ const UserDao = {
 
                 if (err) {
                     reject(err);
+                    return;
                 }
 
                 const query = `INSERT INTO Users(email, password_hash, salt) VALUES(?, ?, ?)`;
@@ -67,9 +71,9 @@ const UserDao = {
                         salt
                     ],
                     function (err) {
-
                         if (err) {
                             reject(err);
+                            return;
                         } else {
                             resolve(new User(this.lastID, email, hashedPassword.toString('hex'), salt));
                         }
@@ -81,4 +85,4 @@ const UserDao = {
 
 }
 
-export default UserDao;
+export default UserDAO;

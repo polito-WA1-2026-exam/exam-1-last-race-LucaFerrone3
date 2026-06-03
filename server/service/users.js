@@ -1,4 +1,4 @@
-import UserDao from '../dao/user.js';
+import UserDAO from '../dao/user.js';
 import UserDTO from '../dto/user.js';
 import ServerError from '../errors/ServerError.js';
 import ValidationError from '../errors/ValidationError.js';
@@ -8,10 +8,10 @@ const UserService = {
     async createUser(body) {
         const { email, password } = body;
 
-        const isAlreadyRegistered = await UserDao.getUserByEmail(email);
+        const isAlreadyRegistered = await UserDAO.getUserByEmail(email);
         if (isAlreadyRegistered) throw new ValidationError("Email already registered");
 
-        const user = await UserDao.createUser(email, password);
+        const user = await UserDAO.createUser(email, password);
         if (!user) throw new ServerError("Error creating user");
 
         return UserDTO.from(user);
@@ -24,7 +24,7 @@ const UserService = {
                 "Email and password are required"
             );
 
-        const user = await UserDao.getUser(email, password);
+        const user = await UserDAO.getUser(email, password);
 
         if (!user) return null;
 

@@ -4,14 +4,14 @@ import session from "express-session";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import cors from "cors";
-import UserDao from "./dao/user.js";
+import UserDAO from "./dao/user.js";
 import UserService from "./service/users.js";
 
 //import routes
 import usersRoutes from './routes/users.js';
 //import mapsRoutes from './routes/maps.js';
 //import gamesRoutes from './routes/games.js';
-//import eventsRoutes from './routes/events.js';
+import eventsRoutes from './routes/events.js';
 
 // init express
 const app = new express();
@@ -86,7 +86,7 @@ app.use((err, req, res, next) => {
 app.use('/users', usersRoutes);
 //app.use('/maps', mapsRoutes);
 //app.use('/games', gamesRoutes);
-//app.use('/events', eventsRoutes);
+app.use('/events', eventsRoutes);
 
 
 // activate the server
