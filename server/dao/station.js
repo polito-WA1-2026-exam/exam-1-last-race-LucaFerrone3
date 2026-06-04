@@ -19,7 +19,27 @@ const StationDAO = {
                 resolve(new Station(row.station_id,row.name,row.is_interchange));
             });
         });
+    },
+
+    async getStations() {
+        return new Promise((resolve, reject) => {
+            const query = "SELECT * FROM Stations";
+
+            db.all(query, [], (err, rows) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+
+                const stations = rows.map(row =>
+                    new Station(row.station_id, row.name, row.is_interchange)
+                );
+
+                resolve(stations);
+            });
+        });
     }
+
 
 };
 

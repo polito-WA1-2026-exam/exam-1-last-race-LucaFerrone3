@@ -159,8 +159,8 @@ Stores the result of a completed game.
 {
     "start_station_id": 1,
     "destination_station_id": 4,
-    "score": 0,
-    "won": false,
+    "score": 15,
+    "won": true,
     "played_at" : "01/06/2026"
 }
 ```
@@ -169,7 +169,12 @@ Stores the result of a completed game.
 
 ```json
 {
-    "message": "Game result stored successfully"
+    "game_id": 7,
+    "start_station": "Porta Nuova",
+    "destination_station": "Porta Susa",
+    "score": 15,
+    "won": true,
+    "played_at": "01/06/2026"
 }
 ```
 
@@ -242,10 +247,10 @@ Starts a new game and returns the starting station, destination station, and the
 
 <br>
 
-# Maps API
+# Map API
 
 
-## Get Complete Map ~ GET /maps
+## Get Complete Map ~ GET /map
 
 Returns the complete transportation map as a graph.
 
@@ -294,7 +299,7 @@ Returns the complete transportation map as a graph.
 
 <br>
 
-## Get Reachable Stations ~ GET /maps/stations/:station_id
+## Get Reachable Stations ~ GET /map/stations/:station_id
 
 Returns the list of stations directly reachable from the specified station.
 
