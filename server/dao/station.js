@@ -12,7 +12,10 @@ const StationDAO = {
                     reject(err);
                     return;
                 }
-
+                if (!row) {
+                    resolve(null);
+                    return;
+                }
                 resolve(new Station(row.station_id,row.name,row.is_interchange));
             });
         });

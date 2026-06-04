@@ -157,8 +157,8 @@ Stores the result of a completed game.
 
 ```json
 {
-    "start_station": "Porta Nuova",
-    "destination_station": "Porta Susa",
+    "start_station_id": 1,
+    "destination_station_id": 4,
     "score": 0,
     "won": false,
     "played_at" : "01/06/2026"

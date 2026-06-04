@@ -28,7 +28,35 @@ const GameDAO = {
                 resolve(games);
             });
         });
-    }
+    },
+
+
+    async createGame(user_id, start_station_id, destination_station_id, score, won, played_at) {
+        return new Promise((resolve, reject) => {
+
+            const query = `INSERT INTO Games(user_id, start_station_id, destination_station_id, score, won, played_at) VALUES(?, ?, ?, ?, ?, ?)`;
+
+            db.run(
+                    query,
+                    [
+                        user_id,
+                        start_station_id,
+                        destination_station_id,
+                        score,
+                        won,
+                        played_at
+                    ],
+                    function (err) {
+                        if (err) {
+                            reject(err);
+                            return;
+                        } else {
+                            resolve(new Game(this.lastID, user_id, start_station_id, destination_station_id, score, won, played_at));
+                        }
+                    }
+                );
+        });
+    },
 
 };
 
