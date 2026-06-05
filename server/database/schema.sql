@@ -38,11 +38,11 @@ CREATE TABLE Lines (
 CREATE TABLE Connections (
     connection_id INTEGER PRIMARY KEY,
     line_id INTEGER NOT NULL,
-    from_station_id INTEGER NOT NULL,
-    to_station_id INTEGER NOT NULL,
+    station_u INTEGER NOT NULL,
+    station_v INTEGER NOT NULL,
     FOREIGN KEY (line_id) REFERENCES Lines(line_id),
-    FOREIGN KEY (from_station_id) REFERENCES Stations(station_id),
-    FOREIGN KEY (to_station_id) REFERENCES Stations(station_id)
+    FOREIGN KEY (station_u) REFERENCES Stations(station_id),
+    FOREIGN KEY (station_v) REFERENCES Stations(station_id)
 );
 
 

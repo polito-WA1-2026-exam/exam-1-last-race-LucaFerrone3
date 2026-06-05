@@ -24,15 +24,15 @@ export const MapService = {
         const connectionDTOS = [];
 
         for (const connection of connections) {
-            const fromStation = stationsDTOS.find(station => station.station_id === connection.from_station_id);
-            const toStation = stationsDTOS.find(station => station.station_id === connection.to_station_id);
-            if (!fromStation || !toStation) throw new ServerError("Error taking stations for connections");
+            const station_u = stationsDTOS.find(station => station.station_id === connection.station_u_id);
+            const station_v = stationsDTOS.find(station => station.station_id === connection.station_v_id);
+            if (!station_u || !station_v) throw new ServerError("Error taking stations for connections");
 
             const line = lines.find(line => line.line_id === connection.line_id);
             if(!line) throw new ServerError("Error taking line for connections");
             
 
-            connectionDTOS.push(ConnectionDTO.from(connection.connection_id, line, fromStation, toStation));
+            connectionDTOS.push(ConnectionDTO.from(connection.connection_id, line, station_u, station_v));
         }
 
         return MapDTO.from(stationsDTOS, connectionDTOS);

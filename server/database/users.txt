@@ -1,17 +1,17 @@
 {
-    "user_id": 9,
+    "user_id": 1,
     "email" : "admin@studenti.polito.it",
     "password" : "root"
 }
 
 {
-    "user_id": 10,
+    "user_id": 2,
     "email": "luca@studenti.polito.it",
     "password" : "root"
 }
 
 {
-    "user_id": 11,
+    "user_id": 3,
     "email" : "professore@studenti.polito.it",
     "password" : "root"
 }

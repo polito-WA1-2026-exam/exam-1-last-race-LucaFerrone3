@@ -14,7 +14,7 @@ const ConnectionDAO = {
                 }
 
                 const connections = rows.map(row =>
-                    new Connection(row.connection_id, row.line_id, row.from_station_id, row.to_station_id)
+                    new Connection(row.connection_id, row.line_id, row.station_u_id, row.station_v_id)
                 );
 
                 resolve(connections);

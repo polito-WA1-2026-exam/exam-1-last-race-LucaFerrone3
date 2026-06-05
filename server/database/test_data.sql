@@ -3,6 +3,15 @@ DELETE FROM Lines;
 DELETE FROM LineStations;
 DELETE FROM Connections;
 DELETE FROM Stations;
+DELETE FROM Users;
+DELETE FROM Games;
+
+
+INSERT INTO Users (user_id, email, password_hash, salt) VALUES
+(1,'admin@studenti.polito.it','6fe0d2ba2cdeaba35f62fa04e462ec18902dd99a0ad41092bd24a92cbf6d5ee2','df11551ee48f3782537940c52294b984'),
+(2,'luca@studenti.polito.it','a6808ac7eddfad992b76e3d2a0ba36c37cbe2a06bee4172beaa4a152bc6f1a90','4a8b97ec83d12a21d1b07309b1e7b3c9'),
+(3,'professore@studenti.polito.it','6842acaea1b4c029116836d4350dc36138a0d8b44fa6939797d859058ba4aaf0','066f24601444cf041b4ebf497f25d794');
+
 
 INSERT INTO Events (description, score) VALUES
 ('Quiet journey', 0),
@@ -136,7 +145,7 @@ INSERT INTO Lines (line_id, name) VALUES
 (5, 'Line 18');
 
 -- M1
-INSERT INTO LineStations VALUES
+INSERT INTO LineStations (line_id, station_id, position) VALUES
 (1, 1, 1),
 (1, 2, 2),
 (1, 3, 3),
@@ -147,7 +156,7 @@ INSERT INTO LineStations VALUES
 (1, 8, 8);
 
 -- linea 4
-INSERT INTO LineStations VALUES
+INSERT INTO LineStations (line_id, station_id, position) VALUES
 (2, 5, 1),
 (2, 9, 2),
 (2, 10, 3),
@@ -155,7 +164,7 @@ INSERT INTO LineStations VALUES
 (2, 13, 5);
 
 -- linea 13
-INSERT INTO LineStations VALUES
+INSERT INTO LineStations (line_id, station_id, position) VALUES
 (3, 4, 1),
 (3, 11, 2),
 (3, 10, 3),
@@ -163,7 +172,7 @@ INSERT INTO LineStations VALUES
 (3, 13, 5);
 
 -- linea 15
-INSERT INTO LineStations VALUES
+INSERT INTO LineStations (line_id, station_id, position) VALUES
 (4, 1, 1),
 (4, 15, 2),
 (4, 10, 3),
@@ -171,7 +180,7 @@ INSERT INTO LineStations VALUES
 (4, 17, 5);
 
 -- linea 18
-INSERT INTO LineStations VALUES
+INSERT INTO LineStations (line_id, station_id, position) VALUES
 (5, 20, 1),
 (5, 19, 2),
 (5, 18, 3),
@@ -179,56 +188,62 @@ INSERT INTO LineStations VALUES
 (5, 2, 5),
 (5, 10, 6);
 
-INSERT INTO Connections VALUES
+
+
+INSERT INTO Connections (connection_id, line_id, station_u, station_v) VALUES
 (1,1,1,2),
-(2,1,2,1),
 (3,1,2,3),
-(4,1,3,2),
 (5,1,3,4),
-(6,1,4,3),
 (7,1,4,5),
-(8,1,5,4),
 (9,1,5,6),
-(10,1,6,5),
 (11,1,6,7),
-(12,1,7,6),
 (13,1,7,8),
-(14,1,8,7),
 
 (15,2,5,9),
-(16,2,9,5),
 (17,2,9,10),
-(18,2,10,9),
 (19,2,10,12),
-(20,2,12,10),
 (21,2,12,13),
-(22,2,13,12),
 
 (23,3,4,11),
-(24,3,11,4),
 (25,3,11,10),
-(26,3,10,11),
 (27,3,10,14),
-(28,3,14,10),
 (29,3,14,13),
-(30,3,13,14),
 
 (31,4,1,15),
-(32,4,15,1),
 (33,4,15,10),
-(34,4,10,15),
 (35,4,10,16),
-(36,4,16,10),
 (37,4,16,17),
-(38,4,17,16),
 
 (39,5,20,19),
-(40,5,19,20),
 (41,5,19,18),
-(42,5,18,19),
 (43,5,18,1),
-(44,5,1,18),
 (45,5,1,2),
-(46,5,2,1),
-(47,5,2,10),
-(48,5,10,2);
+(47,5,2,10);
+
+
+INSERT INTO Games (game_id, user_id, start_station_id, destination_station_id, score, won, played_at) VALUES
+(1, 1, 1, 13, 12, 1, '2026-05-20 09:15:00'),
+(2, 1, 4, 17, 8, 1, '2026-05-21 14:30:00'),
+(3, 1, 20, 8, -2, 0, '2026-05-22 18:10:00'),
+
+(4, 2, 1, 10, 5, 1, '2026-05-23 08:45:00'),
+(5, 2, 2, 14, 10, 1, '2026-05-23 17:20:00'),
+(6, 2, 7, 13, -1, 0, '2026-05-24 11:05:00'),
+(7, 2, 15, 18, 7, 1, '2026-05-25 16:40:00'),
+(8, 2, 3, 20, -3, 0, '2026-05-26 13:15:00'),
+
+(9, 3, 5, 12, 9, 1, '2026-05-27 10:25:00'),
+(10, 3, 11, 2, 4, 1, '2026-05-27 19:00:00'),
+(11, 3, 6, 17, -4, 0, '2026-05-28 07:50:00'),
+
+(12, 1, 8, 14, 15, 1, '2026-05-29 12:35:00'),
+(13, 2, 19, 4, 6, 1, '2026-05-30 09:55:00'),
+(14, 3, 16, 13, -2, 0, '2026-05-30 20:10:00'),
+
+(15, 1, 18, 10, 11, 1, '2026-05-31 15:45:00'),
+(16, 2, 9, 1, 3, 1, '2026-06-01 08:20:00'),
+(17, 3, 12, 7, -5, 0, '2026-06-01 18:30:00'),
+
+(18, 1, 15, 20, 2, 0, '2026-06-02 11:00:00'),
+(19, 2, 4, 13, 13, 1, '2026-06-03 14:50:00'),
+(20, 3, 2, 16, 7, 1, '2026-06-04 09:40:00');
