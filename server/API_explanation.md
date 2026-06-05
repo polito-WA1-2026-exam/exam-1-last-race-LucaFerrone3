@@ -189,7 +189,7 @@ Stores the result of a completed game.
 
 ## Start Game ~ POST /api/games/start
 
-Starts a new game and returns the starting station, destination station, and the list of connections available from the starting station.
+Starts a new game and returns the starting station, destination station, and the list of connections present in the network.
 
 **Request Body:** None
 
@@ -275,12 +275,12 @@ Returns the complete transportation map as a graph.
                 "line_id": 5,
                 "name": "10",
             },
-            "from_station": {
+            "station_u": {
                 "station_id": 54,
                 "name": "Nizza",
                 "is_interchange": true
             },
-            "to_station": {
+            "station_v": {
                 "station_id": 55,
                 "name": "Nizza Sud",
                 "is_interchange": false
@@ -299,36 +299,62 @@ Returns the complete transportation map as a graph.
 
 <br>
 
-## Get Reachable Stations ~ GET /api/map/stations/:station_id
+## Validate Route ~ POST /api/map/validate-route
 
-Returns the list of stations directly reachable from the specified station.
+Validates whether the submitted route is a valid path between the starting and destination stations.
 
-**Path Parameters:**
+**Request Body:**
 
-| Parameter  | Type    | Description               |
-| ---------- | ------- | ------------------------- |
-| station_id | integer | Identifier of the station |
+| Field                  | Type     | Description                               |
+| ---------------------- | -------- | ----------------------------------------- |
+| start_station_id       | integer  | Identifier of the starting station        |
+| destination_station_id | integer  | Identifier of the destination station     |
+| route                  | object[] | Ordered list of edges composing the route |
+
+**Request Example:**
+
+```json
+{
+    "start_station_id": 1,
+    "destination_station_id": 10,
+    "route": [
+        {
+            "station_u_id": 1,
+            "station_v_id": 2
+        },
+        {
+            "station_u_id": 2,
+            "station_v_id": 5
+        },
+        {
+            "station_u_id": 5,
+            "station_v_id": 10
+        }
+    ]
+}
+```
 
 **Response:**
 
 ```json
-[
-    {
-        "station_id": 4,
-        "name": "Bernini",
-        "is_interchange": false
-    },
-    {
-        "station_id": 54,
-        "name": "Nizza",
-        "is_interchange": true
-    },
-]
+{
+    "valid": true
+}
+```
+
+or
+
+```json
+{
+    "valid": false
+}
 ```
 
 **Status Codes:**
 
-* `200` Stations retrieved successfully
+* `200` Request satysfied
+* `400` Invalid request body
 * `401` Unauthorized
-* `404` Station not found
+* `404` One or more stations not found
+* `422` Route is invalid
 * `500` Internal Server Error
