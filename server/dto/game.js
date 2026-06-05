@@ -11,14 +11,4 @@ export const GameDTO = {
     }
 }
 
-export const StartGameDTO = {
-    from(from_station, to_station, reachable_stations) {
-        return {
-            from_station: from_station,
-            to_station: to_station,
-            reachable_stations: reachable_stations,
-        }
-    }
-}
-
  
