@@ -14,7 +14,6 @@ const GameService = {
 
         const results_with_name = [];
         for (const result of results_with_id) {
-            console.log(result);
             const start_station = await StationDAO.getStationById(result.start_station_id);
             if (!start_station) throw new ServerError("Error taking the start station");
 
@@ -47,6 +46,9 @@ const GameService = {
         if (score === undefined) throw new ValidationError("score field is required");
         if (won === undefined) throw new ValidationError("won field is required");
         if (played_at === undefined) throw new ValidationError("played_at field is required");
+
+        if (start_station_id < 0 ) throw new ValidationError("start_station_id must be positive");
+        if (destination_station_id < 0) throw new ValidationError("destination_station_id must be positive");
 
         if(score < 0) throw new ValidationError("score field must be a positive number");
         if(won !== true && won !== false) throw new ValidationError("won field must be either false or true");

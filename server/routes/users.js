@@ -53,10 +53,10 @@ router.post("/login", (req, res, next) => {
 
 });
 
-router.delete("/logout", isLoggedIn, (req, res) => {
+router.delete("/logout", isLoggedIn, (req, res, next) => {
 
     req.logout((err) => {
-        if (err) rext(err);
+        if (err) return next(err);
         res.end();
     });
 

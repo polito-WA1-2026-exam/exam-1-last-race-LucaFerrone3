@@ -11,8 +11,8 @@ router.get(
         try{
             const steps = req.query.steps;
             if (!steps ) return res.status(400).json({ error: "Missing steps query parameter" });
-            if (steps < 0) return res.status(400).json({ error: "Steps query parameter must be positive" });
-
+            if (steps <= 0) return res.status(400).json({ error: "Steps query parameter must be positive" });
+            if (isNaN(steps)) return res.status(400).json({ error: "Steps query parameter must be a number" });
             const events = await EventService.getEvents(steps);
             return res.status(200).json(events);
         }catch(err){
