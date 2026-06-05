@@ -1,6 +1,6 @@
 # Users API
 
-## Create Account ~ POST /users/register
+## Create Account ~ POST /api/users/register
 
 Creates a new user account.
 
@@ -30,7 +30,7 @@ Creates a new user account.
 
 <br>
 
-## Login ~ POST /users/login
+## Login ~ POST /api/users/login
 
 Login with an existing user account.
 
@@ -60,7 +60,7 @@ Login with an existing user account.
 
 <br>
 
-## Logout ~ DELETE /users/logout
+## Logout ~ DELETE /api/users/logout
 
 Logout for an already logged-in account.
 
@@ -74,7 +74,7 @@ Logout for an already logged-in account.
 
 # Events API
 
-## Get Events ~ GET /events?steps=n
+## Get Events ~ GET /api/events?steps=n
 
 Returns a list of `n` events.
 
@@ -112,7 +112,7 @@ Returns a list of `n` events.
 
 # Games API
 
-## Get Game Results ~ GET /games
+## Get Game Results ~ GET /api/games
 
 Returns the list of games played by the authenticated user.
 
@@ -149,7 +149,7 @@ Returns the list of games played by the authenticated user.
 
 <br>
 
-## Add Game Result ~ POST /games/result
+## Add Game Result ~ POST /api/games/result
 
 Stores the result of a completed game.
 
@@ -187,7 +187,7 @@ Stores the result of a completed game.
 
 <br>
 
-## Start Game ~ POST /games/start
+## Start Game ~ POST /api/games/start
 
 Starts a new game and returns the starting station, destination station, and the list of connections available from the starting station.
 
@@ -250,7 +250,7 @@ Starts a new game and returns the starting station, destination station, and the
 # Map API
 
 
-## Get Complete Map ~ GET /map
+## Get Complete Map ~ GET /api/map
 
 Returns the complete transportation map as a graph.
 
@@ -299,7 +299,7 @@ Returns the complete transportation map as a graph.
 
 <br>
 
-## Get Reachable Stations ~ GET /map/stations/:station_id
+## Get Reachable Stations ~ GET /api/map/stations/:station_id
 
 Returns the list of stations directly reachable from the specified station.
 
