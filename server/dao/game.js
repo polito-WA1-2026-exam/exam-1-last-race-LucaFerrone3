@@ -5,7 +5,7 @@ const GameDAO = {
 
     async getResultsById(user_id) {
         return new Promise((resolve, reject) => {
-            const query = "SELECT * FROM Games WHERE user_id = ?"; 
+            const query = "SELECT * FROM Games WHERE user_id = ? ORDER BY score DESC"; 
 
             db.all(query, [user_id], (err, rows) => {
                 if (err) {
