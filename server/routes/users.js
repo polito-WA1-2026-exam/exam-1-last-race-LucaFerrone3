@@ -62,4 +62,11 @@ router.delete("/logout", isLoggedIn, (req, res, next) => {
 
 });
 
+router.get("/me", (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.json(req.user);
+  }
+  res.status(401).json({ error: "Not authenticated" });
+});
+
 export default router;

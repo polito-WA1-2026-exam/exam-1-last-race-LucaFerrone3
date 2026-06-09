@@ -1,0 +1,24 @@
+:root {
+  --color-primary: #0055A4;
+  --color-secondary: #FFEA00;
+  --color-background: #F0F4F8;
+  --color-card-background: #FFFFFF;
+  --color-border: #DDE1E4;
+  --color-text: #2B2B2B;
+  --color-icon: #6B7280;
+
+  --font-primary: 'Inter', sans-serif;
+
+  --font-size-xxs: 12px;
+  --font-size-xs: 14px;
+  --font-size-sm: 16px;
+  --font-size-md: 20px;
+  --font-size-lg: 24px;
+
+}
+
+
+.last-race-container {
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
