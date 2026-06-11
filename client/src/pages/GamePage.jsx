@@ -1,9 +1,11 @@
 import NavbarTitleOnly from "../components/navbars/NavbarTitleOnly/NavbarTitleOnly";
-import LogoutCard from '../components/cards/LogoutCard/LogoutCard';
+import SignUpCard from '../components/cards/SignUpCard/SignUpCard';
 import Footer from '../components/footer/Footer'
 import { Container } from "react-bootstrap";
 
-function LogoutPage() {
+
+
+function GamePage() {
     return (
         <>
             <Container
@@ -17,7 +19,7 @@ function LogoutPage() {
 
                 {/* si espande al massimo */}
                 <div className="flex-grow-1 d-flex">
-                    <LogoutCard />
+                    
                 </div>
 
                 {/* occupa solo lo spazio necessario */}
@@ -29,4 +31,4 @@ function LogoutPage() {
     );
 }
 
-export default LogoutPage;
+export default GamePage;

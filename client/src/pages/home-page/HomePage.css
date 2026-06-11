@@ -1,0 +1,19 @@
+
+.homepage-btn-custom {
+  background-color: var(--color-primary) !important;
+  border: none !important;
+  color: white !important;
+  border-radius: 12px !important;
+  height: 42px !important;
+  font-size: clamp(0.9rem, 1.2vw, 1.2rem) !important;
+}
+
+.homepage-btn-custom:hover {
+  background-color: var(--color-primary);
+}
+
+
+.homepage-text{
+  font-weight: 200;
+  font-size: clamp(0.9rem, 1.2vw, 1.2rem);
+}

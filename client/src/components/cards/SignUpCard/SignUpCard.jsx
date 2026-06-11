@@ -1,13 +1,16 @@
 import { FaUser, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Container, Row, Col, Form, InputGroup, Button } from 'react-bootstrap';
 import { useNavigate, Navigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext} from 'react';
+import IsLoggedInContext from '../../../contexts/IsLoggedInContext'
 import validator from "validator";
 import './SignUpCard.css'
 
 function SignUpCard() {
 
     const navigate = useNavigate();
+
+    const[isLoggedIn, setIsLoggedIn] = useContext(IsLoggedInContext);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -82,7 +85,7 @@ function SignUpCard() {
                     setFetchError(user.error || "Login after the creation of the account is failed for unknown reason");
                     return;
                 }
-
+                setIsLoggedIn(true);
                 navigate('/');
 
             } catch (err) {

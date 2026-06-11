@@ -171,7 +171,7 @@ describe('Login ', () => {
 
 describe('Logout', () => {
 
-    test('DELETE /api/users/logout 200', async () => {
+    test('POST /api/users/logout 200', async () => {
         const logoutAgent = request.agent(app);
 
         await logoutAgent
@@ -182,16 +182,16 @@ describe('Logout', () => {
             });
 
 
-        const response = await logoutAgent.delete('/api/users/logout');
+        const response = await logoutAgent.post('/api/users/logout');
 
         expect(response.status).toBe(200);
 
     });
 
 
-    test('DELETE /api/users/logout 401 - unauthorized', async () => {
+    test('POST /api/users/logout 401 - unauthorized', async () => {
 
-        const response = await request.agent(app).delete('/api/users/logout');
+        const response = await request.agent(app).post('/api/users/logout');
 
         expect(response.status).toBe(401);
     });

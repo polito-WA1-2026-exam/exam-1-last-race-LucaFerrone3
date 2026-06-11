@@ -1,7 +1,7 @@
 import NavbarTitleOnly from "../components/navbars/NavbarTitleOnly/NavbarTitleOnly";
 import LoginCard from '../components/cards/LoginCard/LoginCard';
 import Footer from '../components/footer/Footer'
-import { Container, Row, Col, Form } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 function LoginPage() {
     return (
         <>

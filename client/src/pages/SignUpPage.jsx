@@ -1,7 +1,7 @@
 import NavbarTitleOnly from "../components/navbars/NavbarTitleOnly/NavbarTitleOnly";
 import SignUpCard from '../components/cards/SignUpCard/SignUpCard';
 import Footer from '../components/footer/Footer'
-import { Container, Row, Col, Form } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
 function SignUpPage() {
     return (

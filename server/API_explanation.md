@@ -60,7 +60,7 @@ Login with an existing user account.
 
 <br>
 
-## Logout ~ DELETE /api/users/logout
+## Logout ~ POST /api/users/logout
 
 Logout for an already logged-in account.
 

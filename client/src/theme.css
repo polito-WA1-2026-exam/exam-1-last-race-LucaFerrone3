@@ -21,4 +21,9 @@
 .last-race-container {
   background-color: var(--color-background);
   color: var(--color-text);
+  font-family: var(--font-primary);
+}
+
+html, body{
+  overscroll-behavior: none;
 }

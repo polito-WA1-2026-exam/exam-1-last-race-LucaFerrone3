@@ -1,13 +1,16 @@
 import { FaUser, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Container, Row, Col, Form, InputGroup, Button } from 'react-bootstrap';
 import { Link, useNavigate, Navigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext} from 'react';
+import IsLoggedInContext from '../../../contexts/IsLoggedInContext'
 import validator from "validator";
 import './LoginCard.css'
 
 function LoginCard() {
 
     const navigate = useNavigate();
+
+    const [isLoggedIn, setIsLoggedIn] = useContext(IsLoggedInContext);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -60,7 +63,7 @@ function LoginCard() {
                     setFetchError(user.error || "Login failed for unknown reason");
                     return;
                 }
-
+                setIsLoggedIn(true);
                 navigate('/');
 
             } catch (err) {
@@ -72,16 +75,9 @@ function LoginCard() {
         }
     }
 
-    useEffect(() => {
-        fetch("http://localhost:3001/api/users/me", {
-            credentials: "include"
-        })
-            .then(res => {
-                if (res.ok) {
-                    navigate("/");
-                }
-            });
-    }, []);
+    if (isLoggedIn === true) {
+        navigate("/");
+    }
 
     return (
         <>

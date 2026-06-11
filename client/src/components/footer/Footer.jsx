@@ -1,7 +1,5 @@
 import './Footer.css';
 
-import './Footer.css';
-
 function LoginPage() {
     return (
         <footer className='footer'>

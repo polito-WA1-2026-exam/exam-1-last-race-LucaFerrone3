@@ -1,0 +1,20 @@
+.logout-icon {
+  color: var(--color-primary);
+}
+
+.login-card p {
+  color: var(--color-text);
+}
+
+.cancel-btn-custom{
+  background-color: var(--color-card-background) !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
+  border-radius: 12px !important;
+  height: 52px !important;
+}
+
+.logout-btn {
+  width: 100%;
+  max-width: 220px;
+}
