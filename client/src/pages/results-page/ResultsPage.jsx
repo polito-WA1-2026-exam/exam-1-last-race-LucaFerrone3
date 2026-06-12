@@ -1,7 +1,9 @@
-import NavbarWithLink from "../components/navbars/NavbarWithLink/NavbarWithLink";
-import ResultTable from '../components/result-table/ResultTable';
-import Footer from '../components/footer/Footer'
+import NavbarWithLink from "../../components/navbars/NavbarWithLink/NavbarWithLink";
+import ResultTable from '../../components/result-table/ResultTable';
+import Footer from '../../components/footer/Footer'
 import { Container } from "react-bootstrap";
+import './ResultsPage.css';
+
 function ResultsPage() {
     return (
         <>
@@ -15,7 +17,7 @@ function ResultsPage() {
                 </div>
 
                 {/* si espande al massimo */}
-                <div className="flex-grow-1 d-flex">
+                <div className="table-container flex-grow-1 d-flex">
                     <ResultTable />
                 </div>
 

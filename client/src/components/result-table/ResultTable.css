@@ -1,0 +1,32 @@
+.result-table {
+    width: 100% !important;
+    min-width: 600px; 
+}
+
+.result-table thead th {
+    border: none !important;
+    background-color: transparent;
+    font-weight: 600;
+    padding: 1rem;
+}
+
+.result-table tbody td {
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 1px solid #dee2e6;
+    padding: 1rem;
+    vertical-align: middle;
+    color: var(--color-primary);
+}
+
+
+.result-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+.no-found-text {
+  font-weight: 200;
+  font-size: clamp(0.9rem, 1.2vw, 1.2rem);
+}

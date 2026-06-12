@@ -2,7 +2,7 @@ import HomePage from './pages/home-page/HomePage'
 import SignUpPage from './pages/SignUpPage'
 import LoginPage from './pages/LoginPage'
 import LogoutPage from './pages/LogoutPage'
-import ResultsPage from './pages/ResultsPage'
+import ResultsPage from './pages/results-page/ResultsPage'
 import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom"
 import { useEffect, useState } from 'react'
 import IsLoggedInContext from './contexts/IsLoggedInContext'
