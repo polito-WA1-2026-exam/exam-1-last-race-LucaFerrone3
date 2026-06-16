@@ -62,19 +62,6 @@
 }
 
 
-.btn-custom {
-  background-color: var(--color-primary) !important;
-  border: none !important;
-  color: white !important;
-  border-radius: 12px !important;
-  height: 52px !important;
-}
-
-.btn-custom:hover {
-  background-color: var(--color-primary);
-}
-
-
 .sign-up-label {
   font-size: var(--font-size-xs);
   text-align: center;

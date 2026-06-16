@@ -11,20 +11,15 @@ function ResultsPage() {
                 fluid
                 className="d-flex flex-column min-vh-100"
             >
-                {/* occupa solo lo spazio necessario */}
-                <div>
-                    <NavbarWithLink type={'results'}/>
-                </div>
+                <NavbarWithLink type={'results'}/>
 
-                {/* si espande al massimo */}
-                <div className="table-container flex-grow-1 d-flex">
+                {/* Takes up all available space */}
+                <main className="result-table-main flex-grow-1 d-flex">
                     <ResultTable />
-                </div>
+                </main>
 
-                {/* occupa solo lo spazio necessario */}
-                <div>
-                    <Footer />
-                </div>
+                
+                <Footer />
             </Container>
         </>
     );

@@ -1,4 +1,4 @@
-.logout-icon {
+.end-game-card-icon {
   color: var(--color-primary);
 }
 
@@ -14,7 +14,7 @@
   height: 52px !important;
 }
 
-.logout-btn {
+.end-game-card-btn {
   width: 100%;
   max-width: 220px;
 }

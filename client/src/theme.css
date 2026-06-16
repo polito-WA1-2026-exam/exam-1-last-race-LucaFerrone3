@@ -1,3 +1,4 @@
+/* Global css variables definition*/
 :root {
   --color-primary: #0055A4;
   --color-secondary: #FFEA00;
@@ -6,6 +7,7 @@
   --color-border: #DDE1E4;
   --color-text: #2B2B2B;
   --color-icon: #6B7280;
+  --color-btn-hover: #004080;
 
   --font-primary: 'Inter', sans-serif;
 
@@ -25,5 +27,52 @@
 }
 
 html, body{
-  overscroll-behavior: none;
+  overscroll-behavior: none; /* Prevents browser overscroll behavior when the user reaches the top or bottom of the page. */
+}
+
+
+.custom-btn {
+  background-color: var(--color-primary) !important;
+  border: none !important;
+  color: white !important;
+  border-radius: 12px !important;
+  height: 42px !important;
+  font-size: clamp(0.9rem, 1.2vw, 1.2rem) !important;
+}
+
+.custom-btn:hover {
+  background-color: var(--color-btn-hover) !important;
+}
+
+
+.custom-text {
+  font-weight: 200;
+  font-size: clamp(0.9rem, 1.2vw, 1.2rem);
+}
+
+
+.custom-navbar-title .navbar-brand {
+  color: var(--color-primary);
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-family: var(--font-primary);
+  text-decoration: none; /* serve per disattivare il cambio colore del hover*/
+}
+
+
+.custom-navbar-title .navbar-brand:hover {
+  color: var(--color-btn-hover);
+  cursor: pointer;
+}
+
+.custom-btn-large {
+  background-color: var(--color-primary) !important;
+  border: none !important;
+  color: white !important;
+  border-radius: 12px !important;
+  height: 52px !important;
+  font-size: clamp(0.9rem, 1.2vw, 1.2rem) !important;
+}
+
+.custom-btn-large:hover {
+  background-color: var(--color-btn-hover) !important;
 }

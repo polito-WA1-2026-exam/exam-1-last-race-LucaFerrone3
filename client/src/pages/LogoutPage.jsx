@@ -1,4 +1,4 @@
-import NavbarTitleOnly from "../components/navbars/NavbarTitleOnly/NavbarTitleOnly";
+import NavbarTitleOnly from "../components/navbars/NavbarTitleOnly";
 import LogoutCard from '../components/cards/LogoutCard/LogoutCard';
 import Footer from '../components/footer/Footer'
 import { Container } from "react-bootstrap";
@@ -10,20 +10,14 @@ function LogoutPage() {
                 fluid
                 className="d-flex flex-column min-vh-100"
             >
-                {/* occupa solo lo spazio necessario */}
-                <div>
-                    <NavbarTitleOnly />
-                </div>
+                <NavbarTitleOnly />
 
-                {/* si espande al massimo */}
-                <div className="flex-grow-1 d-flex">
+                {/* Takes up all available space */}
+                <main className="flex-grow-1 d-flex">
                     <LogoutCard />
-                </div>
+                </main>
 
-                {/* occupa solo lo spazio necessario */}
-                <div>
-                    <Footer />
-                </div>
+                <Footer />
             </Container>
         </>
     );

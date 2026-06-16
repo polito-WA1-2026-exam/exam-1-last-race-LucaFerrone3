@@ -24,9 +24,3 @@
 .result-table tbody tr:last-child td {
     border-bottom: none;
 }
-
-
-.no-found-text {
-  font-weight: 200;
-  font-size: clamp(0.9rem, 1.2vw, 1.2rem);
-}

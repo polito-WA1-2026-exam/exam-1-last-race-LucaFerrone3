@@ -1,4 +1,4 @@
-import NavbarTitleOnly from "../components/navbars/NavbarTitleOnly/NavbarTitleOnly";
+import NavbarTitleOnly from "../components/navbars/NavbarTitleOnly";
 import SignUpCard from '../components/cards/SignUpCard/SignUpCard';
 import Footer from '../components/footer/Footer'
 import { Container } from "react-bootstrap";
@@ -10,20 +10,14 @@ function SignUpPage() {
                 fluid
                 className="d-flex flex-column min-vh-100"
             >
-                {/* occupa solo lo spazio necessario */}
-                <div>
-                    <NavbarTitleOnly />
-                </div>
+                <NavbarTitleOnly />
 
-                {/* si espande al massimo */}
-                <div className="flex-grow-1 d-flex">
-                    <SignUpCard />
-                </div>
-
-                {/* occupa solo lo spazio necessario */}
-                <div>
-                    <Footer />
-                </div>
+                {/* Takes up all available space */}
+                <main className="flex-grow-1 d-flex"> 
+                    <SignUpCard /> 
+                </main>
+                
+                <Footer />
             </Container>
         </>
     );

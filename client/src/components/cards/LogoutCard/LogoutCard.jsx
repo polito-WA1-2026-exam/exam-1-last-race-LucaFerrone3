@@ -2,7 +2,7 @@ import { FaSignOutAlt } from 'react-icons/fa';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import IsLoggedInContext from '../../../contexts/IsLoggedInContext';
+import {IsLoggedInContext} from '../../../Contexts';
 import './LogoutCard.css';
 
 function LogoutCard() {
@@ -65,7 +65,7 @@ function LogoutCard() {
                             </Button>
 
                             <Button
-                                className='logout btn-custom flex-grow1 px-2 px-md-4 mb-5'
+                                className='logout custom-btn-large flex-grow1 px-2 px-md-4 mb-5'
                                 onClick={handleLogout}
                             >
                                 Yes, I'm sure

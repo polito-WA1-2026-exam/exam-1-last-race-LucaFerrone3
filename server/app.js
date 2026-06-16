@@ -17,7 +17,6 @@ import eventsRoutes from './routes/events.js';
 const app = new express();
 
 // init session
-
 app.use(express.json());
 
 app.use(cors({

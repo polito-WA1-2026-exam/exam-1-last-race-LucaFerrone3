@@ -1,11 +1,12 @@
-import NavbarWithButton from "../../components/navbars/NavbarWithButton/NavbarWithButton";
-import NavbarWithLink from "../../components/navbars/NavbarWithLink/NavbarWithLink";
-import Footer from '../../components/footer/Footer'
+import NavbarWithButton from "../components/navbars/NavbarWithButton";
+import NavbarWithLink from "../components/navbars/NavbarWithLink/NavbarWithLink";
+import Footer from '../components/footer/Footer'
+import Map from '../components/maps/map/Map'
+
+import {IsLoggedInContext} from '../Contexts'
+
 import { Container, Button, Col } from "react-bootstrap";
 import { useContext } from 'react'
-import IsLoggedInContext from '../../contexts/IsLoggedInContext'
-import map from '../../assets/map.svg'
-import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
@@ -20,30 +21,27 @@ function HomePage() {
                 fluid
                 className="d-flex flex-column min-vh-100"
             >
-                {/* occupa solo lo spazio necessario */}
-                <div>
-                    {isLoggedIn ? <NavbarWithLink type={'home'} /> : <NavbarWithButton />}
-                </div>
+                
+                {isLoggedIn ? <NavbarWithLink type={'home'} /> : <NavbarWithButton title='Sign up to play' click_function = {()=>{navigate('/login')}}/>}
 
-                {/* si espande al massimo */}
-                <div className="flex-grow-1 d-flex mx-2 mx-md-4 mx-lg-5">
+
+                {/* Takes up all available space */}
+                <main className="flex-grow-1 d-flex mx-2 mx-md-4 mx-lg-5">
                     <Col className="d-flex flex-column align-items-center gap-3">
                         <Col className="d-flex flex-column align-items-center">
-                            <img
-                                src={map}
-                                className="img-fluid py-5 mt-4 mb-5"
-                                alt="Map"
-                            />
+
+                            <Map/>
 
                             <Button
                                 onClick={() => isLoggedIn ? navigate('/game') : navigate('/login')}
-                                className="homepage-btn-custom px-2 px-md-4 mb-5"
+                                className="custom-btn px-2 px-md-4 mb-5"
                             >
                                 {isLoggedIn ? 'Start to play' : 'Sign up to play'}
                             </Button>
+
                         </Col>
 
-                        <Col className=' homepage-text d-flex flex-column align-items-start mx-2 mx-md-4 mx-lg-5'>
+                        <Col className='custom-text d-flex flex-column align-items-start mx-2 mx-md-4 mx-lg-5'>
                             <strong className="mb-4">Welcome to GTT - The Last Race!</strong>
                             <Col>
                                 <p>
@@ -75,12 +73,11 @@ function HomePage() {
                         <br />
 
                     </Col>
-                </div>
+                </main>
 
-                {/* occupa solo lo spazio necessario */}
-                <div>
-                    <Footer />
-                </div>
+                
+                <Footer />
+                
             </Container>
         </>
     );

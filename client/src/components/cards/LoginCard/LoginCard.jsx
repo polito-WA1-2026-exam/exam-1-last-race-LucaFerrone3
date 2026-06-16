@@ -2,7 +2,7 @@ import { FaUser, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Container, Row, Col, Form, InputGroup, Button } from 'react-bootstrap';
 import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { useState, useEffect, useContext} from 'react';
-import IsLoggedInContext from '../../../contexts/IsLoggedInContext'
+import {IsLoggedInContext} from '../../../Contexts'
 import validator from "validator";
 import './LoginCard.css'
 
@@ -154,7 +154,7 @@ function LoginCard() {
                             )
                             }
 
-                            <Button onClick={validateAndSubmit} className='btn-custom w-100 mb-4 px-2'>
+                            <Button onClick={validateAndSubmit} className='custom-btn-large w-100 mb-4 px-2'>
                                 Login
                             </Button>
                             <p className='sign-up-label'>Don't have an account? <Link className='link-color' to='/sign-up'>Sign up</Link></p>

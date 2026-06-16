@@ -1,22 +1,4 @@
-
-.navbar-title-with-button .navbar-brand {
-  color: var(--color-primary);
-  font-size: clamp(1rem, 2vw, 1.5rem);
-  font-family: var(--font-primary);
-  text-decoration: none; /* serve per disattivare il cambio colore del hover*/
-
-}
-
-
-.navbar-title-with-button .navbar-brand:hover {
-  color: var(--color-primary); /* serve per disattivare il cambio colore del hover*/
-  cursor: pointer;
-  
-}
-
-
 .navbar-link-color {
-  color: var(--color-text);
   color: var(--color-primary);
   font-size: clamp(0.9rem, 1.5vw, 1.2rem);
   font-family: var(--font-primary);

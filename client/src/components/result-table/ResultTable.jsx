@@ -1,13 +1,16 @@
 import Table from 'react-bootstrap/Table';
-import './ResultTable.css';
 import { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import { FaCheck } from "react-icons/fa";
 import { FaFaceSadCry } from "react-icons/fa6";
+
+import './ResultTable.css';
+
 function ResultTable() {
     
     const [results, setResults] = useState([]);
 
+    /* Retrieves result games of the user from server */
     useEffect(() => {
         const fetchResults = async () => {
             try {
@@ -32,7 +35,7 @@ function ResultTable() {
 
     if (results.length === 0) {
         return (
-            <Container className="no-found-text d-flex justify-content-center align-items-center">
+            <Container className="custom-text d-flex justify-content-center align-items-center">
                 <p>No game results found!</p>
             </Container>
         );
