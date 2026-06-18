@@ -1,8 +1,8 @@
 import { FaUser, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Container, Row, Col, Form, InputGroup, Button } from 'react-bootstrap';
 import { Link, useNavigate, Navigate } from 'react-router-dom';
-import { useState, useEffect, useContext} from 'react';
-import {IsLoggedInContext} from '../../../Contexts'
+import { useState, useEffect, useContext } from 'react';
+import { IsLoggedInContext } from '../../../Contexts'
 import validator from "validator";
 import './LoginCard.css'
 
@@ -75,8 +75,8 @@ function LoginCard() {
         }
     }
 
-    if (isLoggedIn === true) {
-        navigate("/");
+    if (isLoggedIn) {
+        return <Navigate to="/" replace />;
     }
 
     return (

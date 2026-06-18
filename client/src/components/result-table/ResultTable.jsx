@@ -46,8 +46,8 @@ function ResultTable() {
             <thead>
                 <tr>
                     <th>WON</th>
-                    <th>DESTINATION</th>
                     <th>DEPARTURE</th>
+                    <th>DESTINATION</th>
                     <th>SCORE</th>
                     <th>DATE</th>
                 </tr>
@@ -57,8 +57,8 @@ function ResultTable() {
                 {results.map((result) => (
                     <tr key={result.game_id}>
                         <td>{result.won ? <FaCheck /> : <FaFaceSadCry />}</td>
-                        <td>{result.destination_station}</td>
                         <td>{result.start_station}</td>
+                        <td>{result.destination_station}</td>
                         <td>{result.score}</td>
                         <td>
                             {new Date(result.played_at).toLocaleDateString()}

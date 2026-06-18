@@ -4,7 +4,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useContext, useState, useEffect } from 'react';
 import MapWithoutConnections from '../../../components/maps/map-without-connections/MapWithoutConnections';
 import ListOfConnections from '../../../components/list-of-connections/ListOfConnections';
-import { ScoreContext, TimeContext, GameContext } from '../../../Contexts';
+import { ScoreContext, TimeContext, GameContext, StartingStationContext, DestinationStationContext, ConnectionContext, ConnectionsSelectedContext } from '../../../Contexts';
+import { validateRoute } from '../GameFunctions';
 
 function StartGamePage() {
 
@@ -12,19 +13,22 @@ function StartGamePage() {
     const [gameState, setGameState] = useContext(GameContext);
     const [score, setScore] = useContext(ScoreContext);
 
+    const [startingStation,] = useContext(StartingStationContext);
+    const [destinationStation,] = useContext(DestinationStationContext);
+    const [connections, setConnections] = useContext(ConnectionContext);
+    const [connectionsSelected, setConnectionsSelected] = useContext(ConnectionsSelectedContext);
+
     useEffect(() => {
         if (gameState === 'start') {
             const interval = setInterval(() => {
                 setTime(prev => {
                     if (prev <= 0) {
-                        setGameState('invalid');
-                        /*
-                        if (score > 0) {
-                            setGameState('valid');
+                        if (validateRoute(startingStation, destinationStation, connections, connectionsSelected)) {
+                            setGameState('execute');
                         } else {
-                            setGameState('invalid');
+                            setScore(0);
+                            setGameState('finished');
                         }
-                        */
                         clearInterval(interval);
                         return 0;
                     }
@@ -34,7 +38,11 @@ function StartGamePage() {
 
             return () => clearInterval(interval);
         }
-    }, []);
+    }, [gameState,
+        startingStation,
+        destinationStation,
+        connections,
+        connectionsSelected]);
 
     return (
         <>
@@ -47,47 +55,52 @@ function StartGamePage() {
                     title='End game'
                     click_function={
                         () => {
-                            setGameState('end');
+                            if (validateRoute(startingStation, destinationStation, connections, connectionsSelected)) {
+                                setTime(0);
+                                setGameState('execute');
+                            } else {
+                                setGameState('end');
+                            }
                         }} />
 
                 {/* Takes up all available space */}
                 <main className="flex-grow-1 d-flex">
-                    <Col className="d-flex flex-column h-100">
+                    <Row className="flex-grow-1 mx-3">
 
-                        <Row className="justify-content-center mt-5">
-                            <Col xs="auto">
-                                <p className="mb-0">Departure station: </p>
-                            </Col>
-                            <Col xs="auto">
-                                <p className="mb-0">Destination station: </p>
-                            </Col>
-                        </Row>
+                        <Col xs={12} md={6} className="text-center d-flex flex-column justify-content-center">
+                            <div>
+                                <p className="mb-0">
+                                    <b>Starting station:</b> {startingStation.name}
+                                </p>
+                                <p className="mb-0">
+                                    <b>Destination station:</b> {destinationStation.name}
+                                </p>
+                            </div>
+                        </Col>
 
-                        <Row className="justify-content-center mt-5">
-                            <Col xs="auto">
-                                <p className="mb-0">Remaining time: {time} s</p>
-                            </Col>
-                        </Row>
+                        <Col xs={12} md={6} className="text-center d-flex flex-column justify-content-center mb-3 mb-md-0">
+                            <p className="mb-0">
+                                <b>Remaining time:</b> {time} s
+                            </p>
+                        </Col>
 
-                        <Row className="flex-grow-1 mx-3">
-                            <Col
-                                xs={12}
-                                md={6}
-                                order={{ xs: 2, md: 1 }}
-                            >
-                                <ListOfConnections />
-                            </Col>
+                        <Col
+                            xs={12}
+                            md={6}
+                            className="d-flex justify-content-center"
+                        >
+                            <ListOfConnections />
+                        </Col>
 
-                            <Col
-                                xs={12}
-                                md={6}
-                                order={{ xs: 1, md: 2 }}
-                            >
-                                <MapWithoutConnections />
-                            </Col>
-                        </Row>
+                        <Col
+                            xs={12}
+                            md={6}
+                            className="d-flex justify-content-center"
+                        >
+                            <MapWithoutConnections />
+                        </Col>
 
-                    </Col>
+                    </Row>
                 </main>
 
                 <Footer />
