@@ -5,7 +5,7 @@ import Footer from '../../../components/footer/Footer';
 import NavbarTitleOnly from '../../../components/navbars/NavbarTitleOnly';
 import { ImCoinEuro } from "react-icons/im";
 import { getOrderedConnectionOfRoutes } from '../GameFunctions';
-import { ScoreContext, DestinationStationContext, StartingStationContext, ConnectionsSelectedContext, ConnectionContext, StationsContext, GameContext } from '../../../Contexts';
+import { GameErrorContext, ScoreContext, DestinationStationContext, StartingStationContext, ConnectionsSelectedContext, ConnectionContext, StationsContext, GameContext } from '../../../Contexts';
 import './ExecuteGamePage.css';
 
 
@@ -24,6 +24,8 @@ function ExecuteGamePage() {
     const [eventCount, setEventCount] = useState(0);
     const [events, setEvents] = useState([]);
 
+    const [fetchError, setFetchError] = useContext(GameErrorContext);
+
     useEffect(() => {
         const getEvents = async () => {
             try {
@@ -31,10 +33,7 @@ function ExecuteGamePage() {
                     `http://localhost:3001/api/events?steps=${routes.length}`,
                     {
                         method: 'GET',
-                        credentials: 'include',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
+                        credentials: 'include'
                     }
                 );
 
@@ -42,6 +41,7 @@ function ExecuteGamePage() {
 
                 if (!response.ok) {
                     setFetchError(events_json.error || "Retrieving events failed for unknown reason");
+                    setGameState('error');
                     return;
                 }
 
@@ -49,6 +49,7 @@ function ExecuteGamePage() {
 
             } catch (err) {
                 setFetchError("Server unavailable");
+                setGameState('error');
                 console.error(err);
             }
         };

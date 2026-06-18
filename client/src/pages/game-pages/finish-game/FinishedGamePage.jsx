@@ -4,7 +4,7 @@ import NavbarWithButton from '../../../components/navbars/NavbarWithButton';
 import { ImCoinEuro } from "react-icons/im";
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { ScoreContext, DestinationStationContext, StartingStationContext } from '../../../Contexts';
+import { ScoreContext, DestinationStationContext, StartingStationContext, GameContext, GameErrorContext} from '../../../Contexts';
 import dayjs from 'dayjs';
 import { useEffect } from 'react';
 
@@ -17,6 +17,9 @@ function FinishedGamePage() {
     const played_at = dayjs().format('YYYY-MM-DD HH:mm:ss');
     const navigate = useNavigate();
 
+    const [fetchError, setFetchError] = useContext(GameErrorContext);
+    const [gameState, setGameState] = useContext(GameContext);
+
     let message, won;
     if (score <= 0) {
         won = false;
@@ -27,7 +30,14 @@ function FinishedGamePage() {
     }
 
     useEffect(() => {
+        if (score < 0) {
+            setScore(0);
+        }
+    }, [score]);
+
+    useEffect(() => {
         const addResult = async () => {
+            const finalScore = score < 0 ? 0 : score;
             try {
                 const response = await fetch(
                     'http://localhost:3001/api/games/result',
@@ -40,7 +50,7 @@ function FinishedGamePage() {
                         body: JSON.stringify({
                             start_station_id: startingStation.station_id,
                             destination_station_id: destinationStation.station_id,
-                            score,
+                            score: finalScore,
                             won,
                             played_at
                         })
@@ -50,11 +60,14 @@ function FinishedGamePage() {
                 const events_json = await response.json();
 
                 if (!response.ok) {
-                    console.error(events_json.error || "Retrieving events failed for unknown reason");
+                    setFetchError(events_json.error || "Retrieving events failed for unknown reason");
+                    setGameState('error');
                     return;
                 }
 
             } catch (err) {
+                setFetchError("Server unavailable");
+                setGameState('error');
                 console.error(err);
             }
         };

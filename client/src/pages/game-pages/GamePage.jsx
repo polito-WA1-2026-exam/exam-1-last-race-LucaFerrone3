@@ -2,9 +2,11 @@ import StartGamePage from './start-game/StartGamePage';
 import EndGamePage from './end-game/EndGamePage';
 import FinishedGamePage from './finish-game/FinishedGamePage';
 import { useState, useEffect } from 'react';
-import { GameContext, ScoreContext, TimeContext, ConnectionContext, StartingStationContext, DestinationStationContext, ConnectionsSelectedContext, StationsContext } from '../../Contexts';
+import { GameContext, ScoreContext, TimeContext, ConnectionContext, StartingStationContext, DestinationStationContext, ConnectionsSelectedContext, StationsContext, GameErrorContext } from '../../Contexts';
 import { getTwoRandomStations, createGraph } from './GameFunctions'
 import ExecuteGamePage from './execute-game/ExecuteGamePage';
+import { Container } from 'react-bootstrap';
+import ErrorGamePage from './ErrorGamePage'
 
 function GamePage() {
 
@@ -22,14 +24,21 @@ function GamePage() {
 
     const [graph, setGraph] = useState({});
 
+    const [fetchError, setFetchError] = useState('');
 
     useEffect(() => {
         const setupGame = async () => {
             try {
-                const response = await fetch("http://localhost:3001/api/map");
+                const response = await fetch("http://localhost:3001/api/map", {
+                    method: 'GET',
+                    credentials: 'include',
+
+                });
 
                 if (!response.ok) {
-                    throw new Error(`HTTP Error: ${response.status}`);
+                    setFetchError(response.error || "Game setup failed for unknown reason");
+                    setGameState('error');
+                    return;
                 }
 
                 const data = await response.json();
@@ -50,6 +59,8 @@ function GamePage() {
 
 
             } catch (err) {
+                setFetchError("Server unavailable");
+                setGameState('error');
                 console.error(err);
             }
         };
@@ -87,7 +98,9 @@ function GamePage() {
                                 <ConnectionContext.Provider value={[connections, setConnections]} >
                                     <ConnectionsSelectedContext.Provider value={[connectionsSelected, setConnectionsSelected]}>
                                         <StationsContext.Provider value={[stations, setStations]}>
-                                            <ExecuteGamePage />
+                                            <GameErrorContext.Provider value={[fetchError, setFetchError]}>
+                                                <ExecuteGamePage />
+                                            </GameErrorContext.Provider>
                                         </StationsContext.Provider>
                                     </ConnectionsSelectedContext.Provider>
                                 </ConnectionContext.Provider>
@@ -110,14 +123,20 @@ function GamePage() {
             </>;
         case "finished":
             return <>
-                <StartingStationContext.Provider value={[startingStation,]}>
-                    <DestinationStationContext.Provider value={[destinationStation,]}>
-                        <ScoreContext.Provider value={[score, setScore]}>
-                            <FinishedGamePage />
-                        </ScoreContext.Provider>
-                    </DestinationStationContext.Provider>
-                </StartingStationContext.Provider>
+                <GameContext.Provider value={[gameState, setGameState]}>
+                    <StartingStationContext.Provider value={[startingStation,]}>
+                        <DestinationStationContext.Provider value={[destinationStation,]}>
+                            <ScoreContext.Provider value={[score, setScore]}>
+                                <GameErrorContext.Provider value={[fetchError, setFetchError]}>
+                                    <FinishedGamePage />
+                                </GameErrorContext.Provider>
+                            </ScoreContext.Provider>
+                        </DestinationStationContext.Provider>
+                    </StartingStationContext.Provider>
+                </GameContext.Provider>
             </>;
+        case "error":
+            return <ErrorGamePage error={fetchError} />
     }
 
 }

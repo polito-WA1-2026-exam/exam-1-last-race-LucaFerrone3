@@ -1,14 +1,15 @@
 import { FaSignOutAlt } from 'react-icons/fa';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
-import {IsLoggedInContext} from '../../../Contexts';
+import { useContext, useState } from 'react';
+import { IsLoggedInContext } from '../../../Contexts';
 import './LogoutCard.css';
 
 function LogoutCard() {
 
     const navigate = useNavigate();
     const [, setIsLoggedIn] = useContext(IsLoggedInContext);
+    const [fetchError, setFetchError] = useState('');
 
     async function handleLogout() {
         try {
@@ -21,7 +22,7 @@ function LogoutCard() {
             );
 
             if (!response.ok) {
-                console.log("logout error");
+                setFetchError(user.error || "Logout failed for unknown reason");
                 return;
             }
 
@@ -29,6 +30,7 @@ function LogoutCard() {
             navigate('/');
 
         } catch (err) {
+            setFetchError("Server unavailable");
             console.error(err);
         }
     }
@@ -51,9 +53,9 @@ function LogoutCard() {
                         </h5>
 
                         <p className='homepage-text mb-4'>
-                            You will be logged out and returned to the home page. <br/>
-                            You will not be able to play until you log in again. <br/>
-                            Are you sure? <br/>
+                            You will be logged out and returned to the home page. <br />
+                            You will not be able to play until you log in again. <br />
+                            Are you sure? <br />
                         </p>
 
                         <div className='d-flex justify-content-center gap-3 flex-wrap'>
@@ -73,7 +75,15 @@ function LogoutCard() {
                         </div>
 
                     </div>
+
+                    {fetchError && (
+                        <Container className='validation-error d-flex align-items-center justify-content-center my-5 py-2'>{fetchError}</Container>
+                    )
+                    }
                 </Col>
+
+
+
             </Row>
         </Container>
     );

@@ -25,3 +25,6 @@ export const StartingStationContext = React.createContext();
 
 
 export const ConnectionsSelectedContext = React.createContext();
+
+
+export const GameErrorContext = React.createContext();

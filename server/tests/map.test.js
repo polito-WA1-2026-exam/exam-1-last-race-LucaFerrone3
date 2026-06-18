@@ -56,10 +56,19 @@ describe('GET /api/map', () => {
         jest.spyOn(StationDAO, 'getStations')
             .mockRejectedValue(new Error('Database unavailable'));
 
-        const response = await request(app)
-            .get('/api/map');
+        const response = await agent.get('/api/map');
 
         expect(response.status).toBe(500);
+
+
+    });
+
+
+    test('should return 401 because user is not authenticated', async () => {
+
+        const response = await request(app).get('/api/map');
+
+        expect(response.status).toBe(401);
 
 
     });
@@ -69,8 +78,7 @@ describe('GET /api/map', () => {
         jest.spyOn(ConnectionDAO, 'getConnections')
             .mockRejectedValue(new Error('Database unavailable'));
 
-        const response = await request(app)
-            .get('/api/map');
+        const response = await agent.get('/api/map');
 
         expect(response.status).toBe(500);
 

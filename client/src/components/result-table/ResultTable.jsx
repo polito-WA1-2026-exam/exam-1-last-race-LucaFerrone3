@@ -9,6 +9,7 @@ import './ResultTable.css';
 function ResultTable() {
     
     const [results, setResults] = useState([]);
+    const [fetchError, setFetchError] = useState('');
 
     /* Retrieves result games of the user from server */
     useEffect(() => {
@@ -21,10 +22,14 @@ function ResultTable() {
                         credentials: "include",
                     }
                 );
-
+                if(!response.ok){
+                    setFetchError(response.error || "Get game results failed for unknown reason");
+                    return;
+                }
                 const data = await response.json();
                 setResults(data);
             } catch (err) {
+                setFetchError("Server unavailable");
                 console.error(err);
             }
         };
@@ -32,6 +37,9 @@ function ResultTable() {
         fetchResults();
     }, []);
 
+    if(fetchError){
+        return <Container className='validation-error d-flex align-items-center justify-content-center py-2'>{fetchError}</Container>   
+    }
 
     if (results.length === 0) {
         return (

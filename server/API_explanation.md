@@ -235,6 +235,7 @@ Returns the complete transportation map as a graph.
 **Status Codes:**
 
 * `200` Map retrieved successfully
+* `401` Unauthorized
 * `500` Internal Server Error
 
 <br>

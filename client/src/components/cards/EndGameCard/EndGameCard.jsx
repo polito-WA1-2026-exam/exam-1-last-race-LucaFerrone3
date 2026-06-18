@@ -1,13 +1,11 @@
 import { IoIosAlert } from "react-icons/io";
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import {GameContext, TimeContext, ScoreContext} from '../../../Contexts'
 import './EndGameCard.css';
 
 function EndGameCard({ previousScore }) {
 
-    const navigate = useNavigate();
     const [score, setScore] = useContext(ScoreContext);
     const [gameState, setGameState] = useContext(GameContext);
     const [time, setTime] = useContext(TimeContext);
