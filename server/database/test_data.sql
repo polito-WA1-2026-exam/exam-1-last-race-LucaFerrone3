@@ -1,6 +1,5 @@
 DELETE FROM Events;
 DELETE FROM Lines;
-DELETE FROM LineStations;
 DELETE FROM Connections;
 DELETE FROM Stations;
 DELETE FROM Users;
@@ -143,50 +142,6 @@ INSERT INTO Lines (line_id, name) VALUES
 (3, 'Line 13'),
 (4, 'Line 15'),
 (5, 'Line 18');
-
--- M1
-INSERT INTO LineStations (line_id, station_id, position) VALUES
-(1, 1, 1),
-(1, 2, 2),
-(1, 3, 3),
-(1, 4, 4),
-(1, 5, 5),
-(1, 6, 6),
-(1, 7, 7),
-(1, 8, 8);
-
--- linea 4
-INSERT INTO LineStations (line_id, station_id, position) VALUES
-(2, 5, 1),
-(2, 9, 2),
-(2, 10, 3),
-(2, 12, 4),
-(2, 13, 5);
-
--- linea 13
-INSERT INTO LineStations (line_id, station_id, position) VALUES
-(3, 4, 1),
-(3, 11, 2),
-(3, 10, 3),
-(3, 14, 4),
-(3, 13, 5);
-
--- linea 15
-INSERT INTO LineStations (line_id, station_id, position) VALUES
-(4, 1, 1),
-(4, 15, 2),
-(4, 10, 3),
-(4, 16, 4),
-(4, 17, 5);
-
--- linea 18
-INSERT INTO LineStations (line_id, station_id, position) VALUES
-(5, 20, 1),
-(5, 19, 2),
-(5, 18, 3),
-(5, 1, 4),
-(5, 2, 5),
-(5, 10, 6);
 
 
 

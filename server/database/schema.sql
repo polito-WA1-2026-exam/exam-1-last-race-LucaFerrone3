@@ -44,21 +44,3 @@ CREATE TABLE Connections (
     FOREIGN KEY (station_u_id) REFERENCES Stations(station_id),
     FOREIGN KEY (station_v_id) REFERENCES Stations(station_id)
 );
-
-
-/*
-The LineStations table is useful to retrieve the order of stations in a line using:
-    SELECT *
-    FROM LineStations
-    WHERE line_id = XXXXX
-    ORDER BY position;
-*/
-
-CREATE TABLE LineStations (
-    line_id INTEGER NOT NULL,
-    station_id INTEGER NOT NULL,
-    position INTEGER NOT NULL,
-    PRIMARY KEY (line_id, position),
-    FOREIGN KEY (line_id) REFERENCES Lines(line_id),
-    FOREIGN KEY (station_id) REFERENCES Stations(station_id)
-);
