@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { IsLoggedInContext } from '../../../Contexts';
 import './LogoutCard.css';
+import {clearError} from '../../../logic/clearError';
 
 function LogoutCard() {
 
@@ -12,6 +13,7 @@ function LogoutCard() {
     const [fetchError, setFetchError] = useState('');
 
     async function handleLogout() {
+        clearError(setFetchError);
         try {
             const response = await fetch(
                 'http://localhost:3001/api/users/logout',

@@ -7,6 +7,7 @@ import { useContext } from 'react';
 import { ScoreContext, DestinationStationContext, StartingStationContext, GameContext, GameErrorContext} from '../../../Contexts';
 import dayjs from 'dayjs';
 import { useEffect } from 'react';
+import { clearError } from '../../../logic/clearError';
 
 function FinishedGamePage() {
 
@@ -37,6 +38,7 @@ function FinishedGamePage() {
 
     useEffect(() => {
         const addResult = async () => {
+            clearError(setFetchError);
             const finalScore = score < 0 ? 0 : score;
             try {
                 const response = await fetch(

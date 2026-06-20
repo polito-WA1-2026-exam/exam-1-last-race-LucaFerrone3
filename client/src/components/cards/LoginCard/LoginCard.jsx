@@ -2,9 +2,11 @@ import { FaUser, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Container, Row, Col, Form, InputGroup, Button } from 'react-bootstrap';
 import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
-import { IsLoggedInContext } from '../../../Contexts'
-import validator from "validator";
-import './LoginCard.css'
+import { IsLoggedInContext } from '../../../Contexts';
+import './LoginCard.css';
+import { validateCredentials } from '../../../logic/validation';
+import {login} from '../../../logic/loginRequest';
+import {clearError} from '../../../logic/clearError';
 
 function LoginCard() {
 
@@ -21,59 +23,33 @@ function LoginCard() {
 
     async function validateAndSubmit() {
 
-        let emailErr = '';
-        let passwordErr = '';
-
-        if (!email) {
-            emailErr = 'The email is mandatory';
-        } else if (!validator.isEmail(email)) {
-            emailErr = 'Invalid email';
-        }
-
-        if (!password) {
-            passwordErr = 'The password is mandatory';
-        } else if (password.length < 4) {
-            passwordErr = 'The password must contains at least 4 characters';
-        }
+        clearError(setEmailError);
+        clearError(setPasswordError);
+        clearError(setFetchError);
+        const { emailErr, passwordErr } =
+            validateCredentials(email, password);
 
         setEmailError(emailErr);
         setPasswordError(passwordErr);
 
-        if (!emailErr && !passwordErr) {
+        if (emailErr || passwordErr) return;
 
-            try {
-                const response = await fetch(
-                    'http://localhost:3001/api/users/login',
-                    {
-                        method: 'POST',
-                        credentials: 'include',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            email,
-                            password
-                        })
-                    }
-                );
+        try {
 
-                const user = await response.json();
+            await login(email, password);
+            setIsLoggedIn(true);
+            navigate('/');
 
-                if (!response.ok) {
-                    setFetchError(user.error || "Login failed for unknown reason");
-                    return;
-                }
-                setIsLoggedIn(true);
-                navigate('/');
+        } catch (err) {
 
-            } catch (err) {
-                setFetchError("Server unavailable");
-                console.error(err);
-            }
+            setFetchError(
+                err.message || 'Server unavailable'
+            );
 
-
+            console.error(err);
         }
     }
+
 
     if (isLoggedIn) {
         return <Navigate to="/" replace />;

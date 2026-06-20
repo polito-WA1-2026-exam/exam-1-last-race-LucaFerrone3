@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import { FaCheck } from "react-icons/fa";
 import { FaFaceSadCry } from "react-icons/fa6";
-
+import { clearError } from '../../logic/clearError';
 import './ResultTable.css';
 
 function ResultTable() {
@@ -14,6 +14,7 @@ function ResultTable() {
     /* Retrieves result games of the user from server */
     useEffect(() => {
         const fetchResults = async () => {
+            clearError(setFetchError);
             try {
                 const response = await fetch(
                     "http://localhost:3001/api/games",

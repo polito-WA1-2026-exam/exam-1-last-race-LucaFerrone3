@@ -7,6 +7,7 @@ import { getTwoRandomStations, createGraph } from './GameFunctions'
 import ExecuteGamePage from './execute-game/ExecuteGamePage';
 import { Container } from 'react-bootstrap';
 import ErrorGamePage from './ErrorGamePage'
+import { clearError } from '../../logic/clearError';
 
 function GamePage() {
 
@@ -28,6 +29,7 @@ function GamePage() {
 
     useEffect(() => {
         const setupGame = async () => {
+            clearError(setFetchError);
             try {
                 const response = await fetch("http://localhost:3001/api/map", {
                     method: 'GET',

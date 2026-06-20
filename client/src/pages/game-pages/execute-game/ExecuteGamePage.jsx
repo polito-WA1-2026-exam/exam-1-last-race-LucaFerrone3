@@ -7,7 +7,7 @@ import { ImCoinEuro } from "react-icons/im";
 import { getOrderedConnectionOfRoutes } from '../GameFunctions';
 import { GameErrorContext, ScoreContext, DestinationStationContext, StartingStationContext, ConnectionsSelectedContext, ConnectionContext, StationsContext, GameContext } from '../../../Contexts';
 import './ExecuteGamePage.css';
-
+import { clearError } from '../../../logic/clearError';
 
 function ExecuteGamePage() {
 
@@ -28,6 +28,7 @@ function ExecuteGamePage() {
 
     useEffect(() => {
         const getEvents = async () => {
+            clearError(setFetchError);
             try {
                 const response = await fetch(
                     `http://localhost:3001/api/events?steps=${routes.length}`,
