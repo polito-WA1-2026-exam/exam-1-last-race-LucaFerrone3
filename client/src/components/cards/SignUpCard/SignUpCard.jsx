@@ -45,8 +45,6 @@ function SignUpCard() {
             setFetchError(
                 err.message || 'Server unavailable'
             );
-
-            console.error(err);
         }
 
     }

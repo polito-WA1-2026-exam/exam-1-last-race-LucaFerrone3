@@ -63,7 +63,6 @@ function GamePage() {
             } catch (err) {
                 setFetchError("Server unavailable");
                 setGameState('error');
-                console.error(err);
             }
         };
 

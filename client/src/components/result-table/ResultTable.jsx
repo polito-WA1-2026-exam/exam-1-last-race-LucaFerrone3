@@ -31,7 +31,6 @@ function ResultTable() {
                 setResults(data);
             } catch (err) {
                 setFetchError("Server unavailable");
-                console.error(err);
             }
         };
 
