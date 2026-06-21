@@ -3,7 +3,7 @@ import EndGamePage from './end-game/EndGamePage';
 import FinishedGamePage from './finish-game/FinishedGamePage';
 import { useState, useEffect } from 'react';
 import { GameContext, ScoreContext, TimeContext, ConnectionContext, StartingStationContext, DestinationStationContext, ConnectionsSelectedContext, StationsContext, GameErrorContext } from '../../Contexts';
-import { getTwoRandomStations, createGraph } from './GameFunctions'
+import { getTwoRandomStations, createGraph, shuffle } from './GameFunctions'
 import ExecuteGamePage from './execute-game/ExecuteGamePage';
 import { Container } from 'react-bootstrap';
 import ErrorGamePage from './ErrorGamePage'
@@ -46,7 +46,7 @@ function GamePage() {
                 const data = await response.json();
 
                 setStations(data.stations);
-                setConnections(data.connections);
+                setConnections(shuffle(data.connections));
 
                 const graph = createGraph(data.connections, setGraph);
                 const randomStations = getTwoRandomStations(graph);
