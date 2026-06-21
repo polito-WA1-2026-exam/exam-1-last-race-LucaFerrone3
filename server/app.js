@@ -73,8 +73,6 @@ passport.deserializeUser((user, done) => {
 
 app.use((err, req, res, next) => {
 
-    console.error(err);
-
     res.status(500).json({
         error: "Internal Server Error"
     });

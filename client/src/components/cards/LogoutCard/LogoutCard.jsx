@@ -33,7 +33,6 @@ function LogoutCard() {
 
         } catch (err) {
             setFetchError("Server unavailable");
-            console.error(err);
         }
     }
 

@@ -45,8 +45,6 @@ function LoginCard() {
             setFetchError(
                 err.message || 'Server unavailable'
             );
-
-            console.error(err);
         }
     }
 
